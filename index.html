@@ -18,7 +18,7 @@
 		<h1 class="text-center display-1">WEATHER DASHBOARD</h1>
 		<hr>
 	</header>
-	<main>
+	<main class="position-relative">
 
 		<section id="search" class="mx-4">
 			<h2>Search for a city:</h2>
@@ -38,12 +38,13 @@
 		</section>
 
 		<section id="current-weather">
-			<div class="card">
+			<div class="card col-8 position-absolute top-0 end-0 my-5 ">
 				<h5 class="card-header">Todays Weather</h5>
 				<div class="card-body">
-					<h5 class="card-title">Special title treatment</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
+					<h5 class="card-title ">Date: <span id="current-date"></span></h5>
+					<p class="card-text py-1">Temp: <span id="temp"></span></p>
+					<p class="card-text">Wind:<span id="wind"></span></p>
+					<p class="card-text">Humidity:<span id="humidity"></span></p>
 				</div>
 			</div>
 
