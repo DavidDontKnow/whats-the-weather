@@ -3,18 +3,12 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-#left {
-	min-height: 1vh;
-	max-width: 500px;
-}
 
 #right {
 	margin-left: 200px;
 }
 
-.card {
-	max-width: 1000px;
-}
+
 
 .forecast {
 	max-width: 250px;
