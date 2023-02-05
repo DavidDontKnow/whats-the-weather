@@ -33,9 +33,10 @@
 				<!-- saved cities -->
 			</section>
 			<section id="City-Buttons" class="d-grid col-12">
-				<button class="btn btn-secondary mx-3 my-1" type="button">City</button>
-				<button class="btn btn-secondary d-grid  mx-3 my-2" type="button">City</button>
-				<button class="btn btn-secondary mx-3 my-2" type="button">City</button>
+				<!-- test buttons -->
+				<!-- <button class="btn btn-secondary mx-3 my-1" type="button">City</button> -->
+				<!-- <button class="btn btn-secondary mx-3 my-2" type="button">City</button> -->
+				<!-- <button class="btn btn-secondary mx-3 my-2" type="button">City</button> -->
 			</section>
 		</div>
 		<!-- right -->
@@ -45,11 +46,12 @@
 				<div class="card col-12">
 					<h5 class="card-header">Todays Weather</h5>
 					<div class="card-body">
-						<h5 class="card-title ">City: <span id="current-city"></span><span id="current-date"></span>
+						<h5 class="card-title ">City: <span id="current-city"></span><span id="current-date"></span><img
+								id="weather-icon" src="" alt="weather icon" height="50px">
 						</h5>
-						<p class="card-text py-1">Temp: <span id="temp"></span></p>
-						<p class="card-text">Wind:<span id="wind"></span></p>
-						<p class="card-text">Humidity:<span id="humidity"></span></p>
+						<p class="card-text py-1">Temp: <span id="current-temp"></span> &deg;F</p>
+						<p class="card-text">Wind: <span id="current-wind"></span> MPH</p>
+						<p class="card-text">Humidity: <span id="current-humidity"></span> %</p>
 					</div>
 				</div>
 			</section>
@@ -63,7 +65,7 @@
 							<div class="card forecast" id="forcast-1-card">
 								<h5 class="card-header">Date</h5>
 								<div class="card-body">
-									<p class="card-text py-1">Temp: <span id="temp"></span></p>
+									<p class="card-text py-1">Temp: <span id="temp"></span>&deg;F</p>
 									<p class="card-text">Wind:<span id="wind"></span></p>
 									<p class="card-text">Humidity:<span id="humidity"></span></p>
 								</div>
