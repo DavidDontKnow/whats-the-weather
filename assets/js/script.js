@@ -23,6 +23,7 @@ $(function () {
                 var lon = data[0].lon
                 // console.log(lon, lat)
                 getWeather(lat, lon, result)
+                getForecast(lat, lon, result)
             });
     }
 
@@ -42,6 +43,21 @@ $(function () {
             });
 
     }
+
+
+    function getForecast(lat, lon, result) {
+        var requestURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&cnt=5&appid=1fb8f45e0d479a31123acdde2c53eba3";
+
+        fetch(requestURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data)
+            });
+
+    }
+
 
     function fillData(result, temp, wind, humidity, icon) {
         let cityBtn = $("#City-Buttons");
