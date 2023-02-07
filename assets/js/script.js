@@ -46,7 +46,7 @@ $(function () {
 
 
     function getForecast(lat, lon, result) {
-        var requestURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&cnt=5&appid=1fb8f45e0d479a31123acdde2c53eba3";
+        var requestURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=1fb8f45e0d479a31123acdde2c53eba3";
 
         fetch(requestURL)
             .then(function (response) {
@@ -82,23 +82,24 @@ $(function () {
     }
 
     function fillForecast(data) {
+        var list = [data.list[1], data.list[8], data.list[16], data.list[24], data.list[32]]
 
         for (let i = 0; i < 5; i++) {
 
-            var date = data.list[i].dt_txt.split(" ")
+            var date = list[i].dt_txt.split(" ")
             console.log(date)
             dateDisplay = $("#forecast-" + i + "-date")
             dateDisplay.text(date)
 
-            var temp = data.list[i].main.temp
+            var temp = list[i].main.temp
             var forecastTemp = $("#temp-forecast-" + i)
             forecastTemp.text(temp)
 
-            var wind = data.list[i].wind.speed
+            var wind = list[i].wind.speed
             var forecastWind = $("#wind-forecast-" + i)
             forecastWind.text(wind)
 
-            var humidity = data.list[i].main.humidity
+            var humidity = list[i].main.humidity
             var forecastHumidity = $("#humidity-forecast-" + i)
             forecastHumidity.text(humidity)
         }
