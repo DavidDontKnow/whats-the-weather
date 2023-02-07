@@ -4,11 +4,11 @@ $(function () {
     $(".btn-primary").on("click", function () {
         let btn = $("input");
         let result = btn.val();
-        console.log(result);
         geoApi(result);
         // fillData(result, temp, wind, humidity, icon)
         btn.val("");
     })
+    cityObject = {}
 
     function geoApi(result) {
         var requestURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + result + "&appid=1fb8f45e0d479a31123acdde2c53eba3";
@@ -18,14 +18,21 @@ $(function () {
                 return response.json();
             })
             .then(function (data) {
-                // console.log(data)
+
                 var lat = data[0].lat
                 var lon = data[0].lon
-                // console.log(lon, lat)
+
                 getWeather(lat, lon, result)
                 getForecast(lat, lon, result)
+
+                cityObject.lat = lat;
+                cityObject.lon = lon;
+
+
             });
     }
+
+    console.log(cityObject)
 
     function getWeather(lat, lon, result) {
         var requestURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=1fb8f45e0d479a31123acdde2c53eba3";
@@ -53,7 +60,7 @@ $(function () {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data)
+
                 fillForecast(data)
             });
 
@@ -83,11 +90,12 @@ $(function () {
 
     function fillForecast(data) {
         var list = [data.list[1], data.list[8], data.list[16], data.list[24], data.list[32]]
-
+        console.log(list)
+        cityObject.forecast = list
         for (let i = 0; i < 5; i++) {
 
             var date = list[i].dt_txt.split(" ")
-            console.log(date)
+
             dateDisplay = $("#forecast-" + i + "-date")
             dateDisplay.text(date)
 
@@ -106,10 +114,14 @@ $(function () {
     }
 
 
+    $(".btn-secondary").on("click", function () {
+        let result = btn.val();
+        loadSaved(result);
+
+    })
 
 
-
-
+    console.log(cityObject)
 
 
 })
