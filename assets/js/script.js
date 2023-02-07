@@ -54,10 +54,7 @@ $(function () {
             })
             .then(function (data) {
                 console.log(data)
-                var date = data.list[0].dt_txt.split(" ")
-                dateDisplay = $("#forecast-1-date")
-                dateDisplay.text(date[0])
-                console.log(date[0])
+                fillForecast(data)
             });
 
     }
@@ -84,7 +81,28 @@ $(function () {
 
     }
 
+    function fillForecast(data) {
 
+        for (let i = 0; i < 5; i++) {
+
+            var date = data.list[i].dt_txt.split(" ")
+            console.log(date)
+            dateDisplay = $("#forecast-" + i + "-date")
+            dateDisplay.text(date)
+
+            var temp = data.list[i].main.temp
+            var forecastTemp = $("#temp-forecast-" + i)
+            forecastTemp.text(temp)
+
+            var wind = data.list[i].wind.speed
+            var forecastWind = $("#wind-forecast-" + i)
+            forecastWind.text(wind)
+
+            var humidity = data.list[i].main.humidity
+            var forecastHumidity = $("#humidity-forecast-" + i)
+            forecastHumidity.text(humidity)
+        }
+    }
 
 
 
