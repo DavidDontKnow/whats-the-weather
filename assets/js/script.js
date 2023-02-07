@@ -54,6 +54,10 @@ $(function () {
             })
             .then(function (data) {
                 console.log(data)
+                var date = data.list[0].dt_txt.split(" ")
+                dateDisplay = $("#forecast-1-date")
+                dateDisplay.text(date[0])
+                console.log(date[0])
             });
 
     }
