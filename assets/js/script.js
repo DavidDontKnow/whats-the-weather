@@ -7,7 +7,7 @@ $(function () {
         geoApi(result);
         // fillData(result, temp, wind, humidity, icon)
         btn.val("");
-        window.localStorage.setItem(result, cityObject)
+        window.localStorage.setItem(result, JSON.stringify(cityObject))
     })
     cityObject = {}
 
@@ -73,7 +73,7 @@ $(function () {
         let cityBtn = $("#City-Buttons");
         let newBtn = $("<button>");
         newBtn.attr("type", "button");
-        newBtn.attr("class", "btn btn-secondary mx-3 my-1");
+        newBtn.attr("class", "btn btn-secondary mx-3 my-1 saved-btn");
         newBtn.attr("id", result);
         newBtn.text(result.toUpperCase());
         cityBtn.append(newBtn);
@@ -88,9 +88,12 @@ $(function () {
         humidityDisplay = $("#current-humidity")
         humidityDisplay.text(humidity)
 
+
     }
 
     function fillForecast(data) {
+
+
         var list = [data.list[1], data.list[8], data.list[16], data.list[24], data.list[32]]
         console.log(list)
         cityObject.forecast = list
@@ -100,6 +103,12 @@ $(function () {
 
             dateDisplay = $("#forecast-" + i + "-date")
             dateDisplay.text(date)
+
+            var icon = list[i].weather[0].icon
+            iconDisplay = $("#icon-forecast-" + i)
+            iconDisplay.attr("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png")
+
+
 
             var temp = list[i].main.temp
             var forecastTemp = $("#temp-forecast-" + i)
@@ -116,15 +125,20 @@ $(function () {
     }
 
 
-    $(".btn-secondary").on("click", function (e) {
-        e.target
-        let result = btn.val();
-        console.log(result)
-        loadSaved(result);
-
+    $("body").on("click", function (e) {
+        if ($(event.target).hasClass("btn-secondary")) {
+            console.log("click")
+            $("")
+            loadButton()
+        } else
+            console.log("failed ")
     })
 
-
+    function loadButton(result) {
+        var btn = window.localStorage.getItem('perris');
+        btnContent = JSON.parse(btn)
+        console.log(btnContent)
+    }
 
 
 })
