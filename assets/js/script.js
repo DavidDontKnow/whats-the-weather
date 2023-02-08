@@ -7,6 +7,7 @@ $(function () {
         geoApi(result);
         // fillData(result, temp, wind, humidity, icon)
         btn.val("");
+        window.localStorage.setItem(result, cityObject)
     })
     cityObject = {}
 
@@ -18,7 +19,9 @@ $(function () {
                 return response.json();
             })
             .then(function (data) {
-
+                console.log(data)
+                var cityName = data[0].name
+                cityObject.cityName = cityName;
                 var lat = data[0].lat
                 var lon = data[0].lon
 
@@ -32,7 +35,6 @@ $(function () {
             });
     }
 
-    console.log(cityObject)
 
     function getWeather(lat, lon, result) {
         var requestURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=1fb8f45e0d479a31123acdde2c53eba3";
@@ -114,14 +116,15 @@ $(function () {
     }
 
 
-    $(".btn-secondary").on("click", function () {
+    $(".btn-secondary").on("click", function (e) {
+        e.target
         let result = btn.val();
+        console.log(result)
         loadSaved(result);
 
     })
 
 
-    console.log(cityObject)
 
 
 })
