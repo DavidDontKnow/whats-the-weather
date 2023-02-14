@@ -197,24 +197,7 @@ $(function () {
         }
     }
 
-    function displayBtn() {
-        var items = { ...localStorage };
-        console.log(items)
-        for (let i = 0; i < items.length; i++) {
 
-            var btn = window.localStorage.getItem(items[i]);
-            key = JSON.parse(btn)
-            result = key.cityName
-            let cityBtn = $("#City-Buttons");
-            let newBtn = $("<button>");
-            newBtn.attr("type", "button");
-            newBtn.attr("class", "btn btn-secondary mx-3 my-1 saved-btn");
-            newBtn.attr("id", result);
-            newBtn.text(result.toUpperCase());
-            cityBtn.append(newBtn);
-        }
-    }
 
-    displayBtn()
 
 })
