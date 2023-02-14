@@ -1,6 +1,31 @@
 // elements\
 $(function () {
 
+    loadBtn()
+
+    function loadBtn() {
+        for (let key = 0; key < window.localStorage.length; key++) {
+            const keyName = window.localStorage.key(key)
+            let data = window.localStorage.getItem(keyName)
+            let cityBtn = $("#City-Buttons");
+            let newBtn = $("<button>");
+            newBtn.attr("type", "button");
+            newBtn.attr("class", "btn btn-secondary mx-3 my-1 saved-btn");
+            newBtn.attr("id", keyName);
+            newBtn.text(JSON.parse(data).cityName.toUpperCase());
+            cityBtn.append(newBtn);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     $(".btn-primary").on("click", function () {
         let btn = $("input");
         let result = btn.val();
@@ -130,22 +155,19 @@ $(function () {
         var id = e.target.id
 
         if ($(e.target).hasClass("btn-secondary")) {
+            console.log(id)
             loadButton(id)
         }
     })
 
     function loadButton(id) {
 
-        var btn = window.localStorage.getItem(id);
-        btnContent = JSON.parse(btn)
+        let data = JSON.parse(window.localStorage.getItem(id))
+        console.log(data)
 
-
-        var list = btnContent
-        console.log(list)
-
-        function getCurrentWeather(btnContent) {
-            lat = btnContent.lat
-            lon = btnContent.lon
+        function getCurrentWeather(data) {
+            lat = data.lat
+            lon = data.lon
 
             var requestURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=1fb8f45e0d479a31123acdde2c53eba3";
 
@@ -154,12 +176,13 @@ $(function () {
                     return response.json();
                 })
                 .then(function (data) {
+                    console.log(data);
                     var temp = data.main.temp
                     var wind = data.wind.speed
                     var humidity = data.main.humidity
                     var icon = data.weather[0].icon;
                     let city = $("#current-city");
-                    city.text(btnContent.cityName);
+                    city.text(data.name);
                     img = $("#weather-icon");
                     img.attr("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
                     tempDisplay = $("#current-temp");
@@ -171,27 +194,27 @@ $(function () {
                 });
         }
 
-        getCurrentWeather(btnContent)
+        getCurrentWeather(data)
 
         for (let i = 0; i < 5; i++) {
 
-            var date = list.forecast[i].dt_txt.split(" ")
+            var date = data.forecast[i].dt_txt.split(" ")
             dateDisplay = $("#forecast-" + i + "-date")
             dateDisplay.text(date)
 
-            var icon = list.forecast[i].weather[0].icon
+            var icon = data.forecast[i].weather[0].icon
             iconDisplay = $("#icon-forecast-" + i)
             iconDisplay.attr("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png")
 
-            var temp = list.forecast[i].main.temp
+            var temp = data.forecast[i].main.temp
             var forecastTemp = $("#temp-forecast-" + i)
             forecastTemp.text(temp)
 
-            var wind = list.forecast[i].wind.speed
+            var wind = data.forecast[i].wind.speed
             var forecastWind = $("#wind-forecast-" + i)
             forecastWind.text(wind)
 
-            var humidity = list.forecast[i].main.humidity
+            var humidity = data.forecast[i].main.humidity
             var forecastHumidity = $("#humidity-forecast-" + i)
             forecastHumidity.text(humidity)
         }
